@@ -1,0 +1,36 @@
+{
+  "icon": "./assets/icon.png",
+  "settings": [
+    {
+      "name": {
+        "key": "Configuration"
+      },
+      "settings": [
+        {
+          "name": {
+            "key": "Coin (i.e. bitcoin, ethereum)"
+          },
+          "key": "coin",
+          "defaultValue": "bitcoin",
+          "type": "text"
+        },
+        {
+          "name": {
+            "key": "Max Tiles"
+          },
+          "key": "maxTiles",
+          "defaultValue": 4,
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "bindingsTrays": [
+    {
+      "key": "tray-key",
+      "name": { "key": "tray" },
+      "queryRole": "measure",
+      "minCount": 1
+    }
+  ]
+}
