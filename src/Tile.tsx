@@ -43,6 +43,8 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   // TODO: Show holdings and/or value instead of volume
   // TODO: Make the overall tile narrower and or responsive
   const renderCoinData = () => {
+    // TODO: Need to allow for different currencies and locales
+    const iso_4217_code = 'USD';
     return response ? (
       <>
         <div className="coinName">{response.data.name}</div>
@@ -52,17 +54,21 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
         <img className="icon" src={response.data.image.small} />
         <div className="tradingPair">
           {response.data.symbol.toUpperCase()}
-          <span className="lighter">/USD</span>
+          <span className="lighter">/{iso_4217_code}</span>
         </div>
         <div className="price">
           {response.data.market_data.current_price.usd}
-          <span className="currency">USD</span>
+          <span className="currency">{iso_4217_code}</span>
         </div>
         <div className="priceChange">
           {formatNumber(response.data.market_data.price_change_24h_in_currency.usd, 8)}
         </div>
-        <div className="volume">
-          Vol: {formatNumber(response.data.market_data.total_volume.usd, 8)}
+        <div className="value">
+          Mkt Value:{' '}
+          {(Number(response.data.market_data.current_price.usd) * aggPosition).toLocaleString(
+            'default',
+            { style: 'currency', currency: iso_4217_code }
+          )}
         </div>
       </>
     ) : (
@@ -70,6 +76,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     );
   };
 
+  // TODO: Need to test to see how the tile looks when numbers are positive
   // A rather naive number formatter
   const formatNumber = (parseableString: string, digits: number) => {
     const number = Number(parseableString);

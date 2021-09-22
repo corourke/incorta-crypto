@@ -6,7 +6,7 @@ import { VisualProps } from '@incorta-org/visual-sdk';
 import { Tile } from './Tile';
 
 const IncortaCrypto = (props: VisualProps) => {
-  const [maxTiles, setMaxTiles] = useState<number>();
+  const [maxTiles, setMaxTiles] = useState<number>(4);
 
   useEffect(() => {
     // This seems to fire on just about any update to props,
@@ -27,13 +27,32 @@ const IncortaCrypto = (props: VisualProps) => {
   }, [props.insight.context.insight.bindings]);
 
   // TODO: Only render MAXTILES
+  var tiles = 0;
   const renderedTiles = props.insight.data.data.map(cell => {
     const c: string = cell[0].value;
     const p: number = Number(cell[1].value);
-    return <Tile key={c} coinId={c} aggPosition={p} />;
+
+    if (tiles++ < maxTiles) {
+      return <Tile key={c} coinId={c} aggPosition={p} />;
+    } else return null;
   });
 
-  return <div className="tiles">{renderedTiles}</div>;
+  const renderTitle = () => {
+    return (
+      <div className="insightTitle">
+        <span
+          dangerouslySetInnerHTML={{ __html: props.insight.context.insight.title as any as string }}
+        ></span>
+      </div>
+    );
+  };
+
+  console.log('PROPS: ', props);
+  return (
+    <div>
+      <div className="tiles">{renderedTiles}</div>
+    </div>
+  );
 };
 
 export default IncortaCrypto;

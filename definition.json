@@ -8,14 +8,6 @@
       "settings": [
         {
           "name": {
-            "key": "Coin (i.e. bitcoin, ethereum)"
-          },
-          "key": "coin",
-          "defaultValue": "bitcoin",
-          "type": "text"
-        },
-        {
-          "name": {
             "key": "Max Tiles"
           },
           "key": "maxTiles",
