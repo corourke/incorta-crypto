@@ -20,15 +20,17 @@
   "bindingsTrays": [
     {
       "key": "coin_id",
-      "name": { "key": "Coin-ID" },
+      "name": "Coin-ID",
       "queryRole": "row",
-      "minCount": 1
+      "minCount": 1,
+      "maxCount": 1
     },
     {
       "key": "position",
-      "name": { "key": "Position" },
+      "name": "Position",
       "queryRole": "measure",
-      "minCount": 1
+      "minCount": 1,
+      "maxCount": 1
     }
   ]
 }

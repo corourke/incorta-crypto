@@ -1,11 +1,11 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
-  "version": "0.0.1",
-  "name": "incorta-crypto",
+  "version": "0.2",
+  "name": "crypto",
   "description": "Retrive cryptocurrency prices",
   "author": {
-    "name": "cameron.orourke@incorta.com",
-    "email": ""
+    "name": "Cameron O'Rourke",
+    "email": "cameron.orourke@incorta.com"
   },
   "license": "MIT",
   "repository": "",
@@ -58,9 +58,7 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.1.3"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@incorta-org/visual-sdk": "^0.1.2-alpha.11",
     "@types/axios": "^0.14.0",

@@ -40,7 +40,6 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     }
   }, []);
 
-  // TODO: Show holdings and/or value instead of volume
   // TODO: Make the overall tile narrower and or responsive
   const renderCoinData = () => {
     // TODO: Need to allow for different currencies and locales
