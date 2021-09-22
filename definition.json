@@ -27,8 +27,14 @@
   ],
   "bindingsTrays": [
     {
-      "key": "tray-key",
-      "name": { "key": "tray" },
+      "key": "coin_id",
+      "name": { "key": "Coin-ID" },
+      "queryRole": "row",
+      "minCount": 1
+    },
+    {
+      "key": "position",
+      "name": { "key": "Position" },
       "queryRole": "measure",
       "minCount": 1
     }
