@@ -1,16 +1,9 @@
 ## Incorta SDK Cryptocurrency Component
 
 This Incorta component uses an external API to fetch cryptocurrency values and format
-the data into a tile.
+the data into tiles. It also multiplies the posiion by the current price to display the market value. 
 
-The plans for this are to read a crypto portfolio from a table, and render multiple
-tiles, and possibly do something with the portfolio positions as well.
-
-The current code is still rough -- right now it pulls the coin name from settings and only
-renders one tile. Valid coin names can be
-found in the id element from here: (ex: bitcoin, ethereum, cardano, poladot)
-
-`https://api.coingecko.com/api/v3/coins/list`
+<img width="362" alt="Screen Shot 2021-09-22 at 8 59 32 AM" src="https://user-images.githubusercontent.com/100151/134379687-37266346-6cf1-4444-93ba-f544f54a7e59.png">
 
 This component queries the cryptocurrency API at:
 
