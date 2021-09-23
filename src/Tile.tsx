@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.less';
 import axios, { AxiosResponse } from 'axios';
+import { IconBox } from './IconBox';
 
 interface TileProps {
   coinId: string;
@@ -52,45 +53,98 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     const iso_4217_code = 'USD';
     return response ? (
       <>
+        <IconBox symbol={response.data.symbol} />
         <div className="coinName">{response.data.name}</div>
-        <div className="percentChange">
-          {formatNumber(response.data.market_data.price_change_percentage_24h, 4)}%
-        </div>
-        <img className="icon" src={response.data.image.small} />
         <div className="tradingPair">
           {response.data.symbol.toUpperCase()}
           <span className="lighter">/{iso_4217_code}</span>
         </div>
+        <div className="changeFrame">
+          {renderChangeArrow(Number(response.data.market_data.price_change_24h_in_currency.usd))}
+          <div>
+            {formatNumber(response.data.market_data.price_change_percentage_24h, 4, 'percent')}
+          </div>
+          <div>{formatNumber(response.data.market_data.price_change_24h_in_currency.usd, 8)}</div>
+        </div>
         <div className="price">
-          {response.data.market_data.current_price.usd}
-          <span className="currency">{iso_4217_code}</span>
+          {formatNumber(response.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
-        <div className="priceChange">
-          {formatNumber(response.data.market_data.price_change_24h_in_currency.usd, 8)}
-        </div>
-        <div className="value">
+        {/* <div className="value">
           Mkt Value:{' '}
           {(Number(response.data.market_data.current_price.usd) * aggPosition).toLocaleString(
             'default',
             { style: 'currency', currency: iso_4217_code }
           )}
-        </div>
+        </div> */}
       </>
     ) : (
       ''
     );
   };
 
-  // TODO: Need to test to see how the tile looks when numbers are positive
+  // TODO: Need to properly color percentages
+  // TODO: Need to allow +/- ahead of change values
+  // TODO: Need to properly color change values
   // A rather naive number formatter
-  const formatNumber = (parseableString: string, digits: number) => {
-    const number = Number(parseableString);
+  const formatNumber = (
+    parseableString: string,
+    digits: number,
+    style: string = 'decimal',
+    currency: string = 'USD'
+  ) => {
+    var number = Number(parseableString);
     const negative = number < 0 ? 'red' : '';
+    if (style === 'percent') number /= 100; // Assume number is already x 100
     return (
       <span className={`${negative}`}>
-        {number.toLocaleString('default', { maximumSignificantDigits: digits })}
+        {number.toLocaleString('default', {
+          maximumSignificantDigits: digits,
+          style: style,
+          currency: currency
+        })}
       </span>
     );
+  };
+
+  // Renders an up or down arrow depending on the sign of the passed value
+  const renderChangeArrow = (value: number) => {
+    if (value < 0) {
+      // red down arrow
+      return (
+        <svg
+          width="11"
+          height="8"
+          viewBox="0 0 11 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.5 6.77874L0.525443 0.445833H10.4746L5.5 6.77874Z"
+            fill="#F5222D"
+            fill-opacity="0.5"
+            stroke="#F5222D"
+            stroke-width="0.891667"
+          />
+        </svg>
+      );
+    } else {
+      //green up arrow
+      return (
+        <svg
+          width="11"
+          height="8"
+          viewBox="0 0 11 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.5 0.581678L10.3631 6.77273L0.636871 6.77273L5.5 0.581678Z"
+            fill="#009900"
+            stroke="#006600"
+          />
+        </svg>
+      );
+    }
   };
 
   return <div className="boundingBox">{notice ? <p>{notice}</p> : renderCoinData()}</div>;

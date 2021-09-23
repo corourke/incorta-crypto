@@ -29,6 +29,7 @@ Packages:
 [@incorta-org/create-incorta-visual](https://www.npmjs.com/package/@incorta-org/create-incorta-visual) -- CLI to create new Incorta components
 [axios](https://www.npmjs.com/package/axios) -- for REST API calls
 [use-deep-compare-effect](https://www.npmjs.com/package/use-deep-compare-effect) -- to properly detect changes in the bindings and settings properties
+[extract-colors](https://npm.runkit.com/extract-colors) -- to extact crypto icon colors
 
 Public APIs:
 [CoinGecko API](https://www.coingecko.com/en/api/documentation) -- Market data

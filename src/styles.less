@@ -11,7 +11,7 @@
   display: block;
   float: left;
   margin: 5px;
-  width: 380px;
+  width: 330px;
   height: 100px;
   position: relative;
 
@@ -22,76 +22,88 @@
   padding: 10px;
 }
 
-.coinName {
-  width: 120px;
-  height: 16px;
+.iconBox {
+  display: flex;
   position: absolute;
-  top: 12px;
-  left: 12px;
+  width: 80px;
+  height: 80px;
+  left: 10px;
+  top: 10px;
+
+  padding: 16px;
+  background: #d5dbe5;
+  border-radius: 10px;
+}
+
+.coinName {
+  position: absolute;
+  width: 120px;
+  height: 20px;
+  left: 105px;
+  top: 10px;
 
   font-family: Roboto;
   font-style: normal;
-  color: #666666;
   font-weight: 900;
   font-size: 18px;
-  line-height: 20px;
-}
-
-.percentChange {
-  width: 100px;
-  height: 21px;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-
-  font-family: Roboto;
-  font-style: normal;
-  color: #006600;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 20px;
-  text-align: right;
-}
-
-.icon {
-  position: absolute;
-  left: 12px;
-  top: 40px;
-  width: 46px;
-  height: 46px;
-
-  // border: 1px solid #ffffff;
-  // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #666666;
+  line-height: 21px;
 }
 
 .tradingPair {
+  color: #999999;
   position: absolute;
-  left: 70px;
-  top: 40px;
-  width: 120px;
-  height: 16px;
+  width: 80px;
+  height: 20px;
+  right: 10px;
+  top: 10px;
 
   font-family: Roboto;
   font-style: normal;
-  color: #333333;
   font-weight: bold;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 12px;
+  line-height: 12px;
+  align-items: center;
+  text-align: right;
+}
+
+.changeFrame {
+  position: absolute;
+  width: 215px;
+  height: 20px;
+  left: 105px;
+  top: 32px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  align-items: center;
+  color: #469650;
+}
+
+.changeFrame div {
+  margin-left: 10px;
+  display: inline-block;
 }
 
 .price {
+  color: #333333;
   position: absolute;
-  bottom: 15px;
-  left: 70px;
-  width: 120px;
+  width: 215px;
   height: 24px;
+  left: 105px;
+  bottom: 8px;
 
   font-family: Roboto;
   font-style: normal;
-  color: #333333;
-  font-weight: bold;
-  font-size: 22px;
-  line-height: 26px;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 23px;
+  /* identical to box height */
+  align-items: center;
 }
 
 .currency {
@@ -102,22 +114,6 @@
   font-size: 10px;
   line-height: 12px;
   margin-left: 3px;
-}
-
-.priceChange {
-  position: absolute;
-  right: 12px;
-  top: 40px;
-  width: 160px;
-  height: 16px;
-
-  font-family: Roboto;
-  font-style: normal;
-  color: #006600;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: right;
 }
 
 .value {
