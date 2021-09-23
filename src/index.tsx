@@ -38,16 +38,6 @@ const IncortaCrypto = (props: VisualProps) => {
     } else return null;
   });
 
-  const renderTitle = () => {
-    return (
-      <div className="insightTitle">
-        <span
-          dangerouslySetInnerHTML={{ __html: props.insight.context.insight.title as any as string }}
-        ></span>
-      </div>
-    );
-  };
-
   console.log('PROPS: ', props);
   return (
     <div>

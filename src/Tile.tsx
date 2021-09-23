@@ -10,7 +10,7 @@ interface TileProps {
 export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   const [response, setResponse] = useState<AxiosResponse>();
   const [notice, setNotice] = useState<string>('');
-  console.log('TILE');
+  const [lastUpdate, setLastUpdate] = useState<string>('');
 
   axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/coins/';
   const axiosOptions =
@@ -19,7 +19,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   useEffect(() => {
     /// TODO: Set up periodic real-time refresh
     if (true) {
-      console.log('SENDING QUERY');
+      console.log('SENDING QUERY: ', coinId);
 
       axios
         .get(coinId + axiosOptions)
@@ -27,6 +27,12 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
           console.log('AXIOS RESPONSE:', Response);
           setResponse(Response);
           setNotice('');
+
+          // This is to force a periodic read of the API
+          const timer = setTimeout(() => {
+            console.log('TIMEOUT', lastUpdate);
+            setLastUpdate(new Date().toUTCString());
+          }, 15000);
         })
         .catch(error => {
           console.error('AXIOS ERROR', error.toJSON());
@@ -38,7 +44,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
           }
         });
     }
-  }, []);
+  }, [lastUpdate]);
 
   // TODO: Make the overall tile narrower and or responsive
   const renderCoinData = () => {
