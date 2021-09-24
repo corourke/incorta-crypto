@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.less';
 import axios, { AxiosResponse } from 'axios';
+import { Sparkline } from './Sparkline';
 import { IconBox } from './IconBox';
 
 interface TileProps {
@@ -18,7 +19,6 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     '?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false';
 
   useEffect(() => {
-    /// TODO: Set up periodic real-time refresh
     if (true) {
       console.log('SENDING QUERY: ', coinId);
 
@@ -31,9 +31,8 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
 
           // This is to force a periodic read of the API
           const timer = setTimeout(() => {
-            console.log('TIMEOUT', lastUpdate);
             setLastUpdate(new Date().toUTCString());
-          }, 15000);
+          }, 30000); // 30 seconds
         })
         .catch(error => {
           console.error('AXIOS ERROR', error.toJSON());
@@ -69,6 +68,10 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
         <div className="price">
           {formatNumber(response.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
+        <div className="sparkline">
+          <Sparkline coinId={coinId} currency={iso_4217_code} />
+        </div>
+
         {/* <div className="value">
           Mkt Value:{' '}
           {(Number(response.data.market_data.current_price.usd) * aggPosition).toLocaleString(
