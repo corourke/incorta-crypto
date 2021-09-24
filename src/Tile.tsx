@@ -107,6 +107,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   };
 
   // Renders an up or down arrow depending on the sign of the passed value
+  // TODO: Rare, but what about an unchanged value?
   const renderChangeArrow = (value: number) => {
     if (value < 0) {
       // red down arrow

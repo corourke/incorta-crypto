@@ -6,7 +6,7 @@ interface IconProps {
 }
 
 // I was using https://cryptoicons.org/ which is versatile, but it doesn't have all the coins
-// See alternate: https://github.com/TokenTax/cryptoicon-api
+// Currently using https://cryptoicon-api.vercel.app/
 // It might be better to have all the SVG files in the project:
 //   https://github.com/ErikThiart/cryptocurrency-icons
 //   https://github.com/reddavis/Crypto-Icons-API/tree/master/public/svg/icon
