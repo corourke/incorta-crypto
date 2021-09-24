@@ -30,6 +30,7 @@ Packages:
 [axios](https://www.npmjs.com/package/axios) -- for REST API calls
 [use-deep-compare-effect](https://www.npmjs.com/package/use-deep-compare-effect) -- to properly detect changes in the bindings and settings properties
 [extract-colors](https://npm.runkit.com/extract-colors) -- to extact crypto icon colors
+[react-sparklines](https://www.npmjs.com/package/react-sparklines) -- for sparkline charts
 
 Public APIs:
 [CoinGecko API](https://www.coingecko.com/en/api/documentation) -- Market data
