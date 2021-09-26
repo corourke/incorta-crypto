@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.less';
 import axios, { AxiosResponse } from 'axios';
-import { Sparkline } from './Sparkline';
+import { CryptoSparkline } from './CryptoSparkline';
 import { IconBox } from './IconBox';
 
 interface TileProps {
@@ -10,48 +10,44 @@ interface TileProps {
 }
 
 export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
+  // TODO: combine response and notice into one state
   const [response, setResponse] = useState<AxiosResponse>();
   const [notice, setNotice] = useState<string>('');
   const [lastUpdate, setLastUpdate] = useState<string>('');
+  // TODO: Need to allow for different currencies and locales
+  const iso_4217_code = 'USD';
 
-  axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/coins/';
-  const axiosOptions =
-    '?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false';
-
+  // Fetch the price data periodically
   useEffect(() => {
-    if (true) {
-      console.log('SENDING QUERY: ', coinId);
+    axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/coins/';
+    const axiosOptions =
+      '?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false';
 
-      axios
-        .get(coinId + axiosOptions)
-        .then(Response => {
-          console.log('AXIOS RESPONSE:', Response);
-          setResponse(Response);
-          setNotice('');
+    console.log('API REQUEST: ', coinId);
+    axios
+      .get(coinId + axiosOptions)
+      .then(Response => {
+        console.log('API RESPONSE:', Response);
+        setResponse(Response);
+        setNotice('');
 
-          // This is to force a periodic read of the API
-          const timer = setTimeout(() => {
-            setLastUpdate(new Date().toUTCString());
-          }, 30000); // 30 seconds
-        })
-        .catch(error => {
-          console.error('AXIOS ERROR', error.toJSON());
-          setResponse(undefined);
-          setNotice('Error retrieving coin data');
-          console.error('AXIOS ERROR DATA', error.response.data.error);
-          if (error.response) {
-            setNotice(error.response.data.error);
-          }
-        });
-    }
+        // This is to force a periodic read of the API
+        const timer = setTimeout(() => {
+          setLastUpdate(new Date().toUTCString());
+        }, 30000); // 30 seconds
+      })
+      .catch(error => {
+        setResponse(undefined);
+        console.error('API ERROR', error.response.data.error);
+        if (error.response) {
+          setNotice(error.response.data.error);
+        }
+      });
   }, [lastUpdate]);
 
-  // TODO: Make the overall tile narrower and or responsive
   const renderCoinData = () => {
-    // TODO: Need to allow for different currencies and locales
-    const iso_4217_code = 'USD';
     return response ? (
-      <>
+      <React.Fragment>
         <IconBox symbol={response.data.symbol} />
         <div className="coinName">{response.data.name}</div>
         <div className="tradingPair">
@@ -69,7 +65,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
           {formatNumber(response.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
         <div className="sparkline">
-          <Sparkline coinId={coinId} currency={iso_4217_code} />
+          <CryptoSparkline coinId={coinId} currency={iso_4217_code} />
         </div>
 
         {/* <div className="value">
@@ -79,7 +75,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
             { style: 'currency', currency: iso_4217_code }
           )}
         </div> */}
-      </>
+      </React.Fragment>
     ) : (
       ''
     );
@@ -89,6 +85,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   // TODO: Need to allow +/- ahead of change values
   // TODO: Need to properly color change values
   // A rather naive number formatter
+  // TODO: Refactor into a component
   const formatNumber = (
     parseableString: string,
     digits: number,

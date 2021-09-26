@@ -3,12 +3,14 @@ import './styles.less';
 import axios, { AxiosResponse } from 'axios';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 
-interface SparklineProps {
+interface CryptoPairProps {
   coinId: string;
   currency: string;
 }
 
-export const Sparkline: React.FC<SparklineProps> = ({ coinId, currency }) => {
+// Given a coin identifier (bitcoin, ethereum) and a currency (USD) render a sparkline
+
+export const CryptoSparkline: React.FC<CryptoPairProps> = ({ coinId, currency }) => {
   const [response, setResponse] = useState<AxiosResponse>();
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [chartData, setChartData] = useState([]);
@@ -21,18 +23,15 @@ export const Sparkline: React.FC<SparklineProps> = ({ coinId, currency }) => {
       .get(coinId + axiosOptions)
       .then(Response => {
         setResponse(Response);
-        console.log('AXIOS (SPARKLINE) RESPONSE:', Response);
         const prices: [] = Response.data.prices;
         setChartData(prices.map(data => data[1]));
 
         // This is to force a periodic read of the API
         const timer = setTimeout(() => {
-          console.log('TIMEOUT (SPARKLINE)', lastUpdate);
           setLastUpdate(new Date().toUTCString());
         }, 3600000); // 1 hour
       })
       .catch(error => {
-        console.error('AXIOS ERROR (SPARKLINE)', error.toJSON());
         setResponse(undefined);
       });
   }, [lastUpdate]);
