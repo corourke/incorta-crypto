@@ -40,7 +40,7 @@ export function getIconColors(image: string): Promise<iconColors> {
       // return sorted[0][0];
 
       const iconColor: string = sorted[0][0];
-      const bkgdColor: string = chroma(iconColor).brighten(1.8).desaturate(2).hex();
+      const bkgdColor: string = chroma(iconColor).set('hsl.s', 0.5).set('hsl.l', 0.9).hex();
       return { color: iconColor, background: bkgdColor };
     })
     .catch(e => {
