@@ -17,7 +17,6 @@ const IncortaCrypto = (props: VisualProps) => {
     if (settings) {
       if (settings.maxTiles !== maxTiles) {
         setMaxTiles(settings.maxTiles);
-        console.log('MAXTILES UPDATE');
       }
     }
   }, [props.insight.context.insight.settings]);
@@ -38,7 +37,6 @@ const IncortaCrypto = (props: VisualProps) => {
     } else return null;
   });
 
-  console.log('PROPS: ', props);
   return (
     <div>
       <div className="tiles">{renderedTiles}</div>

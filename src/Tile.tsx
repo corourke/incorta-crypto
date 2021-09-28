@@ -23,7 +23,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     const axiosOptions =
       '?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false';
 
-    console.log('API REQUEST: ', coinId);
+    console.log('CRYPTO API REQUEST: ', coinId);
     axios
       .get(coinId + axiosOptions)
       .then(Response => {
