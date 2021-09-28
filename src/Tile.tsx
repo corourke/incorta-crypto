@@ -54,6 +54,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
           {response.data.symbol.toUpperCase()}
           <span className="lighter">/{iso_4217_code}</span>
         </div>
+
         <div className="changeFrame">
           {renderChangeArrow(Number(response.data.market_data.price_change_24h_in_currency.usd))}
           <div>
@@ -61,6 +62,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
           </div>
           <div>{formatNumber(response.data.market_data.price_change_24h_in_currency.usd, 8)}</div>
         </div>
+
         <div className="price">
           {formatNumber(response.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
@@ -108,6 +110,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
 
   // Renders an up or down arrow depending on the sign of the passed value
   // TODO: Rare, but what about an unchanged value?
+  // TODO: Refactor into a reusable component
   const renderChangeArrow = (value: number) => {
     if (value < 0) {
       // red down arrow
