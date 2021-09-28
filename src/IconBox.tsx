@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { getIconColors } from './color_utils';
+import { Buffer } from 'buffer';
 
 interface IconProps {
   symbol: string;
@@ -19,21 +21,33 @@ interface IconProps {
 export const IconBox: React.FC<IconProps> = ({ symbol }) => {
   const [backgroundColor, setBackgroundColor] = useState<string>('#d5dbe5');
   const iconUrl = `https://cryptoicon-api.vercel.app/api/icon/${symbol}`;
+  const [image, setImage] = useState<Buffer>();
 
   useEffect(() => {
-    // Determine a suitable background color based on the icon
-    // FIX: uncommented these 3 lines as they are currently causing an error
-    // Failed to resolve module specifier "fs". Relative references must start with either "/", "./", or "../"
-    // https://github.com/oliver-moran/jimp/issues/903
-    //
-    // getIconColors(iconUrl).then(colors => {
-    //   setBackgroundColor(colors.background);
-    // });
-  }, []);
+    // Fetch the crypto icon (must be PNG)
+
+    axios
+      .get(iconUrl, { responseType: 'arraybuffer' })
+      .then(response => {
+        setImage(Buffer.from(response.data, 'binary'));
+      })
+      .catch(err => {
+        console.error(err);
+        throw err;
+      });
+  }, [symbol]);
+
+  useEffect(() => {
+    // Compute a suitable background color
+    if (image) {
+      const { color, background } = getIconColors(image);
+      setBackgroundColor(background);
+    }
+  }, [image]);
 
   return (
     <div className="iconBox" style={{ background: backgroundColor }}>
-      <img src={iconUrl} />
+      <img src={image ? `data:image/png;base64,${image.toString('base64')}` : ''} />
     </div>
   );
 };

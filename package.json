@@ -1,6 +1,6 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
-  "version": "0.2",
+  "version": "0.3",
   "name": "crypto",
   "description": "Retrive cryptocurrency prices",
   "author": {
@@ -67,7 +67,7 @@
     "@incorta-org/visual-sdk": "^0.1.2-alpha.11",
     "axios": "^0.21.4",
     "chroma-js": "^2.1.2",
-    "jimp": "^0.16.1",
+    "fast-png": "^5.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-sparklines": "^1.7.0"

@@ -27,7 +27,6 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     axios
       .get(coinId + axiosOptions)
       .then(Response => {
-        console.log('API RESPONSE:', Response);
         setResponse(Response);
         setNotice('');
 
