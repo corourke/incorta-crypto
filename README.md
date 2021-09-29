@@ -20,3 +20,4 @@ See the [SETUP](./SETUP.md) doc for development environement setup instructions.
 - Internationalization
 - Allow the user to select a base currency
 - Computation of total portfolio value
+- Add tests

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.less';
 import axios, { AxiosResponse } from 'axios';
-import { CryptoSparkline } from './CryptoSparkline';
+import { Sparkline } from './Sparkline';
 import { IconBox } from './IconBox';
 
 interface TileProps {
@@ -11,8 +11,8 @@ interface TileProps {
 
 export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
   // TODO: combine response and notice into one state
-  const [response, setResponse] = useState<AxiosResponse>();
-  const [notice, setNotice] = useState<string>('');
+  const [coinData, setCoinData] = useState<AxiosResponse>();
+  const [notice, setNotice] = useState<string>('Loading...');
   const [lastUpdate, setLastUpdate] = useState<string>('');
   // TODO: Need to allow for different currencies and locales
   const iso_4217_code = 'USD';
@@ -27,7 +27,7 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
     axios
       .get(coinId + axiosOptions)
       .then(Response => {
-        setResponse(Response);
+        setCoinData(Response);
         setNotice('');
 
         // This is to force a periodic read of the API
@@ -36,37 +36,35 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
         }, 30000); // 30 seconds
       })
       .catch(error => {
-        setResponse(undefined);
+        setCoinData(undefined);
+        setNotice(error.response.data.error);
         console.error('API ERROR', error.response.data.error);
-        if (error.response) {
-          setNotice(error.response.data.error);
-        }
       });
   }, [lastUpdate]);
 
   const renderCoinData = () => {
-    return response ? (
+    return coinData ? (
       <React.Fragment>
-        <IconBox symbol={response.data.symbol} />
-        <div className="coinName">{response.data.name}</div>
+        <IconBox symbol={coinData.data.symbol} />
+        <div className="coinName">{coinData.data.name}</div>
         <div className="tradingPair">
-          {response.data.symbol.toUpperCase()}
+          {coinData.data.symbol.toUpperCase()}
           <span className="lighter">/{iso_4217_code}</span>
         </div>
 
         <div className="changeFrame">
-          {renderChangeArrow(Number(response.data.market_data.price_change_24h_in_currency.usd))}
+          {renderChangeArrow(Number(coinData.data.market_data.price_change_24h_in_currency.usd))}
           <div>
-            {formatNumber(response.data.market_data.price_change_percentage_24h, 4, 'percent')}
+            {formatNumber(coinData.data.market_data.price_change_percentage_24h, 4, 'percent')}
           </div>
-          <div>{formatNumber(response.data.market_data.price_change_24h_in_currency.usd, 8)}</div>
+          <div>{formatNumber(coinData.data.market_data.price_change_24h_in_currency.usd, 8)}</div>
         </div>
 
         <div className="price">
-          {formatNumber(response.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
+          {formatNumber(coinData.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
         <div className="sparkline">
-          <CryptoSparkline coinId={coinId} currency={iso_4217_code} />
+          <Sparkline coinId={coinId} currency={iso_4217_code} />
         </div>
 
         {/* <div className="value">

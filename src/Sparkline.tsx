@@ -10,7 +10,7 @@ interface CryptoPairProps {
 
 // Given a coin identifier (bitcoin, ethereum) and a currency (USD) render a 24H sparkline
 
-export const CryptoSparkline: React.FC<CryptoPairProps> = ({ coinId, currency }) => {
+export const Sparkline: React.FC<CryptoPairProps> = ({ coinId, currency }) => {
   const [response, setResponse] = useState<AxiosResponse>();
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [chartData, setChartData] = useState([]);

@@ -1,6 +1,6 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
-  "version": "0.3",
+  "version": "1.0.0",
   "name": "crypto",
   "description": "Retrive cryptocurrency prices",
   "author": {

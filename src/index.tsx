@@ -29,11 +29,11 @@ const IncortaCrypto = (props: VisualProps) => {
   // Render a tile for each row returned
   var tiles = 0;
   const renderedTiles = props.insight.data.data.map(cell => {
-    const c: string = cell[0].value;
-    const p: number = Number(cell[1].value);
+    const coinId: string = cell[0].value;
+    const position: number = Number(cell[1].value);
 
     if (tiles++ < maxTiles) {
-      return <Tile key={c} coinId={c} aggPosition={p} />;
+      return <Tile key={coinId} coinId={coinId} aggPosition={position} />;
     } else return null;
   });
 
