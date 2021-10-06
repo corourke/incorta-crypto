@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Icon from 'react-crypto-icons';
 import { getIconColors } from './color_utils';
 import { Buffer } from 'buffer';
 
@@ -27,7 +28,7 @@ export const IconBox: React.FC<IconProps> = ({ symbol }) => {
     // Fetch the crypto icon (must be PNG)
 
     axios
-      .get(iconUrl, { responseType: 'arraybuffer' })
+      .get(iconUrl, { responseType: 'stream' })
       .then(response => {
         setImage(Buffer.from(response.data, 'binary'));
       })
@@ -47,7 +48,10 @@ export const IconBox: React.FC<IconProps> = ({ symbol }) => {
 
   return (
     <div className="iconBox" style={{ background: backgroundColor }}>
-      <img src={image ? `data:image/png;base64,${image.toString('base64')}` : ''} />
+      <Icon name={symbol} size={96} />
     </div>
   );
 };
+
+// To try fetching the icon from an API, replace the Icon element above with:
+//<img src={image ? `data:image/png;base64,${image.toString('base64')}` : ''} />
