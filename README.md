@@ -9,7 +9,7 @@ To try it out:
 
 - `git clone` the repository
 - `cd` into the project directory and install dependencies: `npm install`
-- Run the incorta component server: `create-incorta-visual start`
+- Run the incorta component server: `create-incorta-component start`
 - Navigate to the Incorta analyzer and choose the Developer Visual plugin
 - Drag columns containing coin identifiers (i.e. 'bitcoin', 'ethereum'), and column containing coin holdings into the binding tray
 

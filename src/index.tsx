@@ -2,10 +2,10 @@
 
 // TODO: Needs internationalization
 import React, { useState, useEffect } from 'react';
-import { VisualProps } from '@incorta-org/visual-sdk';
+import { ComponentProps } from '@incorta-org/component-sdk';
 import { Tile } from './Tile';
 
-const IncortaCryptoTiles = (props: VisualProps) => {
+const IncortaCrypto = (props: ComponentProps) => {
   const maxTiles = props.insight.context.insight.settings?.maxTiles || 4;
 
   // Extract the crypto holdings
@@ -26,4 +26,4 @@ const IncortaCryptoTiles = (props: VisualProps) => {
   );
 };
 
-export default IncortaCryptoTiles;
+export default IncortaCrypto;

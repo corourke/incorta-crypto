@@ -1,5 +1,7 @@
 {
   "icon": "./assets/generic-icon.png",
+  "name": "incorta-crypto",
+  "hint": "Display cryptocurrency dashboard tiles with market prices from portfolio data",
   "options": {
     "aggregation": true,
     "individualFilter": true,
