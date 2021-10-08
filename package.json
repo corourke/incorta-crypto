@@ -1,14 +1,14 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
   "version": "1.0.0",
-  "name": "crypto",
-  "description": "Retrive cryptocurrency prices",
+  "name": "incorta-crypto",
+  "description": "Display cryptocurrency portfolio with market prices",
   "author": {
     "name": "Cameron O'Rourke",
     "email": "cameron.orourke@incorta.com"
   },
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/corourke/incorta-crypto",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -62,9 +62,7 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.1.3"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@incorta-org/visual-sdk": "^0.1.2-alpha.11",
     "axios": "^0.21.4",

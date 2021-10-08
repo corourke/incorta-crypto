@@ -1,3 +1,7 @@
+// Queries cryptocurreny market data for a given coinID, formats a
+// dashboard tile, periodicaly refreshes data.
+// See API documentation at https://www.coingecko.com/en/api/documentation
+
 import React, { useState, useEffect } from 'react';
 import './styles.less';
 import axios, { AxiosResponse } from 'axios';
@@ -6,11 +10,9 @@ import { IconBox } from './IconBox';
 
 interface TileProps {
   coinId: string;
-  aggPosition: number;
 }
 
-export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
-  // TODO: combine response and notice into one state
+export const Tile: React.FC<TileProps> = ({ coinId }) => {
   const [coinData, setCoinData] = useState<AxiosResponse>();
   const [notice, setNotice] = useState<string>('Loading...');
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -66,23 +68,12 @@ export const Tile: React.FC<TileProps> = ({ coinId, aggPosition }) => {
         <div className="sparkline">
           <Sparkline coinId={coinId} currency={iso_4217_code} />
         </div>
-
-        {/* <div className="value">
-          Mkt Value:{' '}
-          {(Number(response.data.market_data.current_price.usd) * aggPosition).toLocaleString(
-            'default',
-            { style: 'currency', currency: iso_4217_code }
-          )}
-        </div> */}
       </React.Fragment>
     ) : (
       ''
     );
   };
 
-  // TODO: Need to properly color percentages
-  // TODO: Need to allow +/- ahead of change values
-  // TODO: Need to properly color change values
   // A rather naive number formatter
   // TODO: Refactor into a component
   const formatNumber = (

@@ -1,40 +1,22 @@
-// Displays current cryptocurency price and market information
-// See API documentation at https://www.coingecko.com/en/api/documentation
+// Incorta component Displays current cryptocurency price and market information
 
 // TODO: Needs internationalization
 import React, { useState, useEffect } from 'react';
 import { VisualProps } from '@incorta-org/visual-sdk';
 import { Tile } from './Tile';
 
-const IncortaCrypto = (props: VisualProps) => {
-  const [maxTiles, setMaxTiles] = useState<number>(4);
+const IncortaCryptoTiles = (props: VisualProps) => {
+  const maxTiles = props.insight.context.insight.settings?.maxTiles || 4;
 
-  useEffect(() => {
-    // TODO: This seems to fire on just about any update to props,
-    // Probably need to use something like https://www.npmjs.com/package/use-deep-compare-effect
-    console.log('SETTINGS CHANGE');
-    const settings = props.insight.context.insight.settings;
-    if (settings) {
-      if (settings.maxTiles !== maxTiles) {
-        setMaxTiles(settings.maxTiles);
-      }
-    }
-  }, [props.insight.context.insight.settings]);
+  // Extract the crypto holdings
+  const holdings: { coinId: string; quantity: number }[] = props.insight.data.data.map(cell => {
+    return { coinId: cell[0].value, quantity: Number(cell[1].value) };
+  });
+  console.log('HOLDINGS', holdings);
 
-  useEffect(() => {
-    // TODO: This seems to fire on any change, might need to use useDeepCompareEffect
-    console.log('BINDINGS CHANGE');
-  }, [props.insight.context.insight.bindings]);
-
-  // Render a tile for each row returned
-  var tiles = 0;
-  const renderedTiles = props.insight.data.data.map(cell => {
-    const coinId: string = cell[0].value;
-    const position: number = Number(cell[1].value);
-
-    if (tiles++ < maxTiles) {
-      return <Tile key={coinId} coinId={coinId} aggPosition={position} />;
-    } else return null;
+  // Render a tile for each row returned, up to the maxTiles setting
+  const renderedTiles = holdings.slice(0, maxTiles).map(cell => {
+    return <Tile key={cell.coinId} coinId={cell.coinId} />;
   });
 
   return (
@@ -44,4 +26,4 @@ const IncortaCrypto = (props: VisualProps) => {
   );
 };
 
-export default IncortaCrypto;
+export default IncortaCryptoTiles;

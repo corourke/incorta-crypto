@@ -1,0 +1,7 @@
+ticker,coinID,quantity,position,date_purchased,basis
+BTC,bitcoin,0.55,long,01/08/2021,41639.18
+ADA,cardano,11000,long,01/08/2021,1.342
+ETH,ethereum,5,long,05/09/2021,3785.02
+DOT,polkadot,250,long,15/08/2021,23.53
+NANO,nano,350,long,10/08/2021,5.272
+VET,vechain,15000,long,10/09/2021,0.11331

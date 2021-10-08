@@ -1,5 +1,10 @@
 {
   "icon": "./assets/generic-icon.png",
+  "options": {
+    "aggregation": true,
+    "individualFilter": true,
+    "aggregateFilter": true
+  },
   "settings": [
     {
       "name": {
@@ -23,11 +28,23 @@
       "name": "Coin-ID",
       "queryRole": "row",
       "minCount": 1,
-      "maxCount": 1
+      "maxCount": 1,
+      "settings": [
+        {
+          "name": "Sorting",
+          "settings": [
+            {
+              "type": "sort",
+              "key": "coinid-sort-key",
+              "name": "Sort"
+            }
+          ]
+        }
+      ]
     },
     {
-      "key": "position",
-      "name": "Position",
+      "key": "quantity",
+      "name": "Quantity",
       "queryRole": "measure",
       "minCount": 1,
       "maxCount": 1
