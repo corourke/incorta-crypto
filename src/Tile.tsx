@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './styles.less';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Sparkline } from './Sparkline';
 import { IconBox } from './IconBox';
 
@@ -13,7 +13,7 @@ interface TileProps {
 }
 
 export const Tile: React.FC<TileProps> = ({ coinId }) => {
-  const [coinData, setCoinData] = useState<AxiosResponse>();
+  const [coinData, setCoinData] = useState<any>();
   const [notice, setNotice] = useState<string>('Loading...');
   const [lastUpdate, setLastUpdate] = useState<string>('');
   // TODO: Need to allow for different currencies and locales
@@ -22,20 +22,31 @@ export const Tile: React.FC<TileProps> = ({ coinId }) => {
   // Fetch the price data periodically
   useEffect(() => {
     axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/coins/';
-    const axiosOptions =
-      '?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false';
+    const axiosOptions = {
+      params: {
+        localization: false,
+        tickers: false,
+        market_data: true,
+        community_data: false,
+        developer_data: false
+      }
+    };
 
     console.log('CRYPTO API REQUEST: ', coinId);
     axios
-      .get(coinId + axiosOptions)
+      .get(coinId, axiosOptions)
       .then(Response => {
-        setCoinData(Response);
+        setCoinData(Response.data);
         setNotice('');
 
         // This is to force a periodic read of the API
         const timer = setTimeout(() => {
           setLastUpdate(new Date().toUTCString());
         }, 30000); // 30 seconds
+        // Cleanup timer if component unmounts
+        return () => {
+          clearTimeout(timer);
+        };
       })
       .catch(error => {
         setCoinData(undefined);
@@ -47,23 +58,21 @@ export const Tile: React.FC<TileProps> = ({ coinId }) => {
   const renderCoinData = () => {
     return coinData ? (
       <React.Fragment>
-        <IconBox symbol={coinData.data.symbol} />
-        <div className="coinName">{coinData.data.name}</div>
+        <IconBox symbol={coinData.symbol} />
+        <div className="coinName">{coinData.name}</div>
         <div className="tradingPair">
-          {coinData.data.symbol.toUpperCase()}
+          {coinData.symbol.toUpperCase()}
           <span className="lighter">/{iso_4217_code}</span>
         </div>
 
         <div className="changeFrame">
-          {renderChangeArrow(Number(coinData.data.market_data.price_change_24h_in_currency.usd))}
-          <div>
-            {formatNumber(coinData.data.market_data.price_change_percentage_24h, 4, 'percent')}
-          </div>
-          <div>{formatNumber(coinData.data.market_data.price_change_24h_in_currency.usd, 8)}</div>
+          {renderChangeArrow(Number(coinData.market_data.price_change_24h_in_currency.usd))}
+          <div>{formatNumber(coinData.market_data.price_change_percentage_24h, 4, 'percent')}</div>
+          <div>{formatNumber(coinData.market_data.price_change_24h_in_currency.usd, 8)}</div>
         </div>
 
         <div className="price">
-          {formatNumber(coinData.data.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
+          {formatNumber(coinData.market_data.current_price.usd, 8, 'currency', iso_4217_code)}
         </div>
         <div className="sparkline">
           <Sparkline coinId={coinId} currency={iso_4217_code} />

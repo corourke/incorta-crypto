@@ -1,6 +1,6 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "incorta-crypto",
   "description": "Display cryptocurrency dashboard tiles with market prices from portfolio data",
   "author": {
@@ -62,9 +62,7 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.1.3"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {
     "@incorta-org/component-sdk": "^0.0.1-alpha.1",
     "axios": "^0.21.4",

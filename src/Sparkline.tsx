@@ -15,11 +15,16 @@ export const Sparkline: React.FC<CryptoPairProps> = ({ coinId, currency }) => {
   const [chartData, setChartData] = useState([]);
 
   axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/coins/';
-  // TODO: Use proper parameter object
-  const axiosOptions = '/market_chart?vs_currency=usd&days=1&interval=hourly';
+  const axiosOptions = {
+    params: {
+      vs_currency: currency,
+      days: 1,
+      interval: 'hourly'
+    }
+  };
 
   useEffect(() => {
-    axios.get(coinId + axiosOptions).then(Response => {
+    axios.get(coinId + '/market_chart', axiosOptions).then(Response => {
       const prices: [] = Response.data.prices;
       setChartData(prices.map(data => data[1]));
 
@@ -27,6 +32,10 @@ export const Sparkline: React.FC<CryptoPairProps> = ({ coinId, currency }) => {
       const timer = setTimeout(() => {
         setLastUpdate(new Date().toUTCString());
       }, 3600000); // 1 hour
+      // Cleanup timer if component unmounts
+      return () => {
+        clearTimeout(timer);
+      };
     });
   }, [lastUpdate]);
 

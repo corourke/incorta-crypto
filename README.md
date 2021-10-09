@@ -1,7 +1,9 @@
 ## Incorta SDK Cryptocurrency Component
 
-This Incorta component uses an external API to fetch cryptocurrency values and format
-the data into tiles. It also fetches price history for 24 hours and displays a sparkline. It refreshes the data periodically. It displays an icon for each coin and computes the color for the surrounding rounded box using the dominant icon color. -It also multiplies the positions held by the current price to display the market value.-
+Retrieves current cryptocurrency price data and displays a dashboard tile for each coin
+position in a portfolio. It also refreshes the data periodically. This is an example
+of combinining real-time data fetched from an external source with stored data. This
+technique could also be used in FOREX appliciations.
 
 <img width="341" alt="Sample of rendered crypto tile" src="assets/tile_sample.png">
 
