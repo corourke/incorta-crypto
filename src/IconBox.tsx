@@ -19,37 +19,35 @@ export const IconBox: React.FC<IconProps> = ({ symbol }) => {
 
   useEffect(() => {
     // Fetch the crypto icon (must be PNG)
-    const axiosConfig: AxiosRequestConfig = {
-      responseType: 'arraybuffer'
-    };
-
-    axios
-      .get(iconUrl, axiosConfig)
-      .then(response => {
-        setImage(Buffer.from(response.data, 'binary'));
-      })
-      .catch(err => {
+    fetch(iconUrl, { mode: 'no-cors' })
+      .then(r => r.arrayBuffer())
+      .then(buffer => {
+        setImage(Buffer.from(buffer));
+      }),
+      (err: any) => {
         console.error(err);
         throw err;
-      });
+      };
   }, [symbol]);
 
-  useEffect(() => {
-    // Compute a suitable background color
-    if (image) {
-      const { color, background } = getIconColors(image);
-      setBackgroundColor(background);
-    }
-  }, [image]);
+  // useEffect(() => {
+  //   // Compute a suitable background color
+  //   if (image) {
+  //     const { color, background } = getIconColors(image);
+  //     setBackgroundColor(background);
+  //   }
+  // }, [image]);
 
   return (
     <div className="iconBox" style={{ background: backgroundColor }}>
-      <img src={iconUrl} />
+      <img src={image ? `data:image/png;base64,${image.toString('base64')}` : ''} />
     </div>
   );
 };
 
-// To try fetching the icon from an API, replace the img element above with:
+// To try fetching the icon from an API, replace the img element above:
+// <img src={iconUrl} />
+// with:
 //<img src={image ? `data:image/png;base64,${image.toString('base64')}` : ''} />
 // To try the react-crypto-icons library, use
 //<Icon name={symbol} size={96} />
