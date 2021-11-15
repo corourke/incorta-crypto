@@ -6,12 +6,12 @@ import { ComponentProps } from '@incorta-org/component-sdk';
 import { Tile } from './Tile';
 
 const IncortaCrypto = (props: ComponentProps) => {
-  const maxTiles = props.insight.context.insight.settings?.maxTiles || 4;
+  const maxTiles = props.context.component.settings?.maxTiles || 4;
 
   console.log(props);
 
   // Extract the crypto positions
-  const holdings: { coinId: string; quantity: number }[] = props.insight.data.data.map(cell => {
+  const holdings: { coinId: string; quantity: number }[] = props.response.data.map(cell => {
     return { coinId: cell[0].value, quantity: Number(cell[1].value) };
   });
 

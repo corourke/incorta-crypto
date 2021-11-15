@@ -12,8 +12,9 @@ To try it out:
 - `git clone` the repository
 - `cd` into the project directory and install dependencies: `npm install`
 - Run the incorta component server: `create-incorta-component start`
+- Upload the `data/positions.csv` file into Incorta and create a schema for it. Be sure to load the data.
 - Navigate to the Incorta analyzer and choose the Developer Visual plugin
-- Drag columns containing coin identifiers (i.e. 'bitcoin', 'ethereum'), and column containing coin holdings into the binding tray
+- Drag columns containing coin identifiers (i.e. 'bitcoin', 'ethereum'), and column containing coin holdings (quantity) into the binding tray
 
 See the [SETUP](./SETUP.md) doc for development environement setup instructions.
 

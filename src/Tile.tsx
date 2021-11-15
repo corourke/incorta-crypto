@@ -68,7 +68,7 @@ export const Tile: React.FC<TileProps> = ({ coinId }) => {
         <div className="changeFrame">
           {renderChangeArrow(Number(coinData.market_data.price_change_24h_in_currency.usd))}
           <div>{formatNumber(coinData.market_data.price_change_percentage_24h, 4, 'percent')}</div>
-          <div>{formatNumber(coinData.market_data.price_change_24h_in_currency.usd, 8)}</div>
+          <div>{formatNumber(coinData.market_data.price_change_24h_in_currency.usd, 6)}</div>
         </div>
 
         <div className="price">

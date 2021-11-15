@@ -12,7 +12,11 @@ You'll need access to an Incorta cluster with the SDK enabled. You can request a
 
 > Note: At present, you must upgrade your cluster to use this custom build (note that this changes often):
 >
-> `Incorta-20211008-1604-2807`
+> `20211110-1446-3999`
+>
+> You must also have the cloud operations team turn on the following feature flag:
+>
+> `LABS_VISUAL_SDK`
 
 #### Install Visual Studio Code
 
@@ -22,7 +26,7 @@ https://code.visualstudio.com
 
 #### Install NodeJS
 
-I highly recommend using a package manager for installs. The one I use is [HomeBrew](https://brew.sh). Once HomeBrew is installed, NodeJS can be simply installed with the command:
+On MacOS, I highly recommend using a package manager for installs. The one I use is [HomeBrew](https://brew.sh). Once HomeBrew is installed, NodeJS can be simply installed with the command:
 
 ```bash
 % brew install node
@@ -40,7 +44,7 @@ The node package manager allows the installation of node packages to projects an
 % brew install npm
 ```
 
-Note that after you install commands, you will generally need to open a new terminal to use the command.
+Note that after you install commands, you will generally need to open a new terminal to use the command. You can also use `hash -r` in zsh/bash and `rehash` in sh/csh.
 
 #### Install Git client
 
