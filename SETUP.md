@@ -10,13 +10,8 @@ The Incorta SDK presumes knowledge of HTML, CSS, JSON, Javascript, Node, NPM, Re
 
 You'll need access to an Incorta cluster with the SDK enabled. You can request a free account at: `https://cloud.incorta.com/signup`
 
-> Note: At present, you must upgrade your cluster to use this custom build (note that this changes often):
->
-> `20211110-1446-3999`
->
-> You must also have the cloud operations team turn on the following feature flag:
->
-> `LABS_VISUAL_SDK`
+> Note: The minimum Incorta version needed is 2021.4.2.1 and at present you’ll need to log
+> a support ticket to have the cloud operations team turn on the `LABS_VISUAL_SDK` feature flag.
 
 #### Install Visual Studio Code
 
