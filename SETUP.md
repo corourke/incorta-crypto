@@ -10,14 +10,18 @@ The Incorta SDK presumes knowledge of HTML, CSS, JSON, Javascript, Node, NPM, Re
 
 You'll need access to an Incorta cluster with the SDK enabled. You can request a free account at: `https://cloud.incorta.com/signup`
 
-> Note: The minimum Incorta version needed is 2021.4.2.1 and at present you’ll need to log
-> a support ticket to have the cloud operations team turn on the `LABS_VISUAL_SDK` feature flag.
+> Note: The minimum Incorta version needed is 2021.4.2.1 and at present you’ll need to [log a support ticket](https://incortacloudops.zendesk.com/hc/en-us) 
+> to have the cloud operations team enable the Component SDK in your target cluster.
 
 #### Install Visual Studio Code
 
 Even if you have another favorite editor, the Javascript handling with VSC is just that good.
 
 https://code.visualstudio.com
+
+> Note: These instructions presume that you are running Mac OS. Sorry, I don't have the equivalent instructions for Linux and Windows yet. 
+> The basic requirements and steps are the same. 
+> If you have the correct setup instructions for these environments, please issue a pull request.
 
 #### Install NodeJS
 
@@ -69,7 +73,7 @@ To test the component in Analyzer:
 
 ```bash
 cd incorta-crypto
-yarn install
+npm install
 create-incorta-component start
 ```
 
