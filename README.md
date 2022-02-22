@@ -9,6 +9,9 @@ technique could also be used in FOREX appliciations.
 
 To try it out:
 
+(These are abbreviated instructions -- for a more complete guide, see [Getting Started with the Incorta Component SDK](https://community.incorta.com/t/p8hjygp/getting-started-component-sdk)
+
+- Install the create-incorta-component scripts with `% npm install -g @incorta-org/create-incorta-component`
 - `git clone` the repository
 - `cd` into the project directory and install dependencies: `npm install`
 - Run the incorta component server: `create-incorta-component start`
@@ -16,7 +19,7 @@ To try it out:
 - Navigate to the Incorta analyzer and choose the Developer Visual plugin
 - Drag columns containing coin identifiers (i.e. 'bitcoin', 'ethereum'), and column containing coin holdings (quantity) into the binding tray
 
-See the [SETUP](./SETUP.md) doc for development environement setup instructions.
+See the [SETUP](./SETUP.md) doc for development environment setup instructions.
 
 #### Future improvements
 
