@@ -1,4 +1,4 @@
-ticker,coinID,quantity,position,date_purchased,basis
+symbol,slug,quantity,position,date_purchased,price
 BTC,bitcoin,0.55,long,01/08/2021,41639.18
 ADA,cardano,11000,long,01/08/2021,1.342
 ETH,ethereum,5,long,05/09/2021,3785.02

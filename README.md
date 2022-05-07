@@ -9,7 +9,7 @@ technique could also be used in FOREX appliciations.
 
 To try it out:
 
-(These are abbreviated instructions -- for a more complete guide, see [Getting Started with the Incorta Component SDK](https://community.incorta.com/t/p8hjygp/getting-started-component-sdk)
+(These are abbreviated instructions -- for a more complete guide, see [Getting Started with the Incorta Component SDK](https://community.incorta.com/t5/Dashboards-Analytics/Getting-Started-with-the-Incorta-Component-SDK/ta-p/706)
 
 - Install the create-incorta-component scripts with `% npm install -g @incorta-org/create-incorta-component`
 - `git clone` the repository

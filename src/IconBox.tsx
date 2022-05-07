@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Icon from 'react-crypto-icons';
 
 interface IconProps {
   symbol: string;
@@ -8,7 +7,7 @@ interface IconProps {
 // TODO: Relocate the CSS for this component here
 
 export const IconBox: React.FC<IconProps> = ({ symbol }) => {
-  const iconUrl = `https://cryptoicon-api.vercel.app/api/icon/${symbol}`;
+  const iconUrl = `https://cryptoicons.org/api/icon/${symbol}/96`;
 
   return (
     <div className="iconBox">
@@ -17,5 +16,3 @@ export const IconBox: React.FC<IconProps> = ({ symbol }) => {
   );
 };
 
-// To try the react-crypto-icons library, replace the img element with:
-//<Icon name={symbol} size={96} />

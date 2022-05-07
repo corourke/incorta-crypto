@@ -1,30 +1,24 @@
-// Incorta component Displays current cryptocurency price and market information
+import React from 'react';
+import {
+  useContext,
+  LoadingOverlay,
+  ErrorOverlay,
+  usePrompts,
+  useQuery
+} from '@incorta-org/component-sdk';
+import CryptoTiles from './CryptoTiles';
+import './styles.less';
 
-// TODO: Needs internationalization
-import React, { useState, useEffect } from 'react';
-import { ComponentProps } from '@incorta-org/component-sdk';
-import { Tile } from './Tile';
-
-const IncortaCrypto = (props: ComponentProps) => {
-  const maxTiles = props.context.component.settings?.maxTiles || 4;
-
-  console.log(props);
-
-  // Extract the crypto positions
-  const holdings: { coinId: string; quantity: number }[] = props.response.data.map(cell => {
-    return { coinId: cell[0].value, quantity: Number(cell[1].value) };
-  });
-
-  // Render a tile for each row returned, up to the maxTiles setting
-  const renderedTiles = holdings.slice(0, maxTiles).map(cell => {
-    return <Tile key={cell.coinId} coinId={cell.coinId} />;
-  });
-
+export default () => {
+  const { prompts, drillDown } = usePrompts();
+  const { data, context, isLoading, isError, error } = useQuery(useContext(), prompts);
   return (
-    <div>
-      <div className="tiles">{renderedTiles}</div>
-    </div>
+    <ErrorOverlay isError={isError} error={error}>
+      <LoadingOverlay isLoading={isLoading} data={data}>
+        {context && data ? (
+          <CryptoTiles response={data} context={context} prompts={prompts} drillDown={drillDown} />
+        ) : null}
+      </LoadingOverlay>
+    </ErrorOverlay>
   );
 };
-
-export default IncortaCrypto;

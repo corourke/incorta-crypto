@@ -1,7 +1,7 @@
 {
   "icon": "./assets/crypto-icon.png",
-  "name": "incorta-crypto",
-  "hint": "Display cryptocurrency dashboard tiles with market prices from portfolio data",
+  "name": "CryptoTiles",
+  "hint": "Display cryptocurrency dashboard tiles with market prices from real-time APIs",
   "options": {
     "aggregation": true,
     "individualFilter": true,
@@ -26,8 +26,8 @@
   ],
   "bindingsTrays": [
     {
-      "key": "coin_id",
-      "name": "Coin-ID",
+      "key": "symbol",
+      "name": "Unique Coin ID",
       "queryRole": "row",
       "minCount": 1,
       "maxCount": 1,
@@ -37,7 +37,7 @@
           "settings": [
             {
               "type": "sort",
-              "key": "coinid-sort-key",
+              "key": "symbol-sort-key",
               "name": "Sort"
             }
           ]

@@ -1,14 +1,14 @@
 {
   "id": "787b8424-60dd-45b7-9edf-3204d747330d",
-  "version": "1.0.3",
-  "name": "incorta-crypto",
-  "description": "Display cryptocurrency dashboard tiles with market prices from portfolio data",
+  "version": "1.0.4",
+  "name": "crypto-tiles",
+  "description": "Display cryptocurrency dashboard tiles with market prices from real-time APIs",
   "author": {
     "name": "Cameron O'Rourke",
     "email": "cameron.orourke@incorta.com"
   },
   "license": "MIT",
-  "repository": "https://github.com/corourke/incorta-crypto",
+  "repository": "",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -16,31 +16,25 @@
     "node": ">=10"
   },
   "scripts": {
+    "postinstall": "npm run generate",
+    "generate": "create-incorta-component generate",
     "build": "create-incorta-component package",
-    "start": "create-incorta-component start",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
-    "test:lint": "eslint \"**/*.{ts,tsx}\"",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "start": "create-incorta-component start"
   },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@incorta-org/create-incorta-component": "^0.0.1-alpha.6",
+    "@incorta-org/create-incorta-component": "1.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@types/axios": "^0.14.0",
-    "@types/chroma-js": "^2.1.3",
-    "@types/estree": "^0.0.50",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.12.38",
-    "@types/react": "^17.0.24",
+    "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
-    "@types/react-sparklines": "^1.7.1",
+    "@types/react-sparklines": "^1.7.2",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-eslint": "^10.0.3",
@@ -56,20 +50,18 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "less": "^4.1.1",
-    "microbundle": "^0.13.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.3"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@incorta-org/component-sdk": "^0.0.1-alpha.3",
-    "axios": "^0.21.4",
-    "chroma-js": "^2.1.2",
-    "fast-png": "^5.0.4",
+    "@incorta-org/component-sdk": "^1.0.1",
+    "axios": "^0.26.1",
     "react": "^17.0.2",
-    "react-crypto-icons": "^1.0.5",
     "react-dom": "^17.0.2",
     "react-sparklines": "^1.7.0"
   }
